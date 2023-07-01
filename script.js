@@ -2,9 +2,13 @@
 const widget = document.getElementById('widget');
 
 // Create the input fields and submit button
-const input1 = document.createElement('input');
-input1.placeholder = 'Enter information...';
-widget.appendChild(input1);
+const scheduledInput = document.createElement('input');
+scheduledInput.placeholder = 'Enter number of scheduled patients...';
+widget.appendChild(scheduledInput);
+
+const seenInput = document.createElement('input');
+seenInput.placeholder = 'Enter number of patients seen...';
+widget.appendChild(seenInput);
 
 const submitButton = document.createElement('button');
 submitButton.textContent = 'Submit';
@@ -16,11 +20,25 @@ widget.appendChild(resultContainer);
 
 // Handle submit button click event
 submitButton.addEventListener('click', () => {
-  const userInput = input1.value;
+  const scheduledPatients = parseInt(scheduledInput.value, 10);
+  const seenPatients = parseInt(seenInput.value, 10);
 
-  // Display the user input in the result container
-  resultContainer.textContent = `You entered: ${userInput}`;
+  if (isNaN(scheduledPatients) || isNaN(seenPatients)) {
+    resultContainer.textContent = 'Please enter valid numbers.';
+    return;
+  }
 
-  // Clear the input field
-  input1.value = '';
+  const targetPercentage = 0.8; // 80% target
+  const targetPatients = scheduledPatients * targetPercentage;
+  const remainingPatients = targetPatients - seenPatients;
+
+  if (remainingPatients > 0) {
+    resultContainer.textContent = `Number of additional patients to be seen: ${remainingPatients}`;
+  } else {
+    resultContainer.textContent = 'Quota already met. No additional patients needed.';
+  }
+  
+  // Clear the input fields
+  scheduledInput.value = '';
+  seenInput.value = '';
 });
