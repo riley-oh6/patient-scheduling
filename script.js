@@ -28,8 +28,8 @@ submitButton.addEventListener('click', () => {
   const y = parseFloat(yInput.value);
   const necessaryProportion = parseFloat(proportionInput.value);
 
-  if (isNaN(x) || isNaN(y) || isNaN(necessaryProportion)) {
-    resultContainer.textContent = 'Please enter valid numbers.';
+  if (isNaN(x) || isNaN(y) || isNaN(necessaryProportion) || necessaryProportion <= 0 || necessaryProportion >= 1) {
+    resultContainer.textContent = 'Please enter valid numbers between 0 and 1 for the necessary proportion.';
     return;
   }
 
