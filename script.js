@@ -10,16 +10,17 @@ const submitButton = document.createElement('button');
 submitButton.textContent = 'Submit';
 widget.appendChild(submitButton);
 
+// Create a container for displaying the result
+const resultContainer = document.createElement('div');
+widget.appendChild(resultContainer);
+
 // Handle submit button click event
 submitButton.addEventListener('click', () => {
   const userInput = input1.value;
 
-  // Call your Python script or perform any desired processing here
-  // For simplicity, let's display the user input in an alert box
-  alert(`You entered: ${userInput}`);
+  // Display the user input in the result container
+  resultContainer.textContent = `You entered: ${userInput}`;
+
+  // Clear the input field
+  input1.value = '';
 });
-
-
-
-
-
