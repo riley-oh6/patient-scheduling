@@ -10,6 +10,10 @@ const yInput = document.createElement('input');
 yInput.placeholder = 'Enter value for y...';
 widget.appendChild(yInput);
 
+const proportionInput = document.createElement('input');
+proportionInput.placeholder = 'Enter necessary proportion...';
+widget.appendChild(proportionInput);
+
 const submitButton = document.createElement('button');
 submitButton.textContent = 'Submit';
 widget.appendChild(submitButton);
@@ -22,14 +26,22 @@ widget.appendChild(resultContainer);
 submitButton.addEventListener('click', () => {
   const x = parseFloat(xInput.value);
   const y = parseFloat(yInput.value);
+  const necessaryProportion = parseFloat(proportionInput.value);
 
-  if (isNaN(x) || isNaN(y)) {
+  if (isNaN(x) || isNaN(y) || isNaN(necessaryProportion)) {
     resultContainer.textContent = 'Please enter valid numbers.';
     return;
   }
 
+  const currentProportion = x / y;
+
+  if (currentProportion >= necessaryProportion) {
+    resultContainer.textContent = 'Already at or above the necessary proportion.';
+    return;
+  }
+
   let z = 0;
-  while (((x + z) / (y + z)) < 0.8) {
+  while (((x + z) / (y + z)) < necessaryProportion) {
     z++;
   }
 
@@ -38,4 +50,5 @@ submitButton.addEventListener('click', () => {
   // Clear the input fields
   xInput.value = '';
   yInput.value = '';
+  proportionInput.value = '';
 });
