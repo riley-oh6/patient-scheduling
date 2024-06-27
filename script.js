@@ -44,11 +44,10 @@ submitButton.addEventListener('click', () => {
   while (((x + z) / (y + z)) < necessaryProportion) {
     z++;
   }
-
   resultContainer.textContent = `The minimum value of z is: ${z}`;
   
   // Clear the input fields
   xInput.value = '';
   yInput.value = '';
-  proportionInput.value = '';
+  
 });
